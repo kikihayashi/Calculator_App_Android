@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<String> data;
     private boolean isResult;
 
-    @Override//
+    @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void Input(View view)
+    public void Input(View view)//設定輸入鍵
     {
         if(isResult)
         {
