@@ -3,6 +3,7 @@ package com.wood.calculator_android;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -209,7 +210,8 @@ public class MainActivity extends AppCompatActivity {
 
     public void Back(View view)
     {
-        Boolean condition = (number_str.length() <= 1 ||
+        Boolean condition = (
+                number_str.length() <= 1 ||
                 number_str.toString().equals("Infinity") ||
                 number_str.toString().equals("-Infinity") ||
                 number_str.toString().equals("NaN"));
@@ -220,7 +222,27 @@ public class MainActivity extends AppCompatActivity {
         }
         else
         {
-            number_str.deleteCharAt(number_str.length()-1);
+            double temp_number = Math.abs(Double.valueOf(number_str.toString()));
+            if( getRealNumber(temp_number).matches("[0-9]"))
+            {
+                number_str = new StringBuilder();
+                number_str.append(0);
+                return;
+            }
+            char temp = number_str.charAt(number_str.length()-1);
+            if(number_str.charAt(number_str.length()-2) == '.')
+            {
+                number_str.deleteCharAt(number_str.length()-1);
+                number_str.deleteCharAt(number_str.length()-1);
+                if(temp =='0')
+                {
+                    number_str.deleteCharAt(number_str.length()-1);
+                }
+            }
+            else
+            {
+                number_str.deleteCharAt(number_str.length()-1);
+            }
         }
         showResult.setText(number_str.toString()+ " ");
     }
